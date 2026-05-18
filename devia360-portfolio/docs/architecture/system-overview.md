@@ -4,29 +4,29 @@
 
 ## Design principles
 
-DEVIA was built under specific constraints that shaped every architectural decision:
+DEVIA was built under specific constraints that shaped every architectural decision.
 
-1. **Solo developer** — The architecture had to be maintainable by one person. No microservices, no Kubernetes, no over-engineering.
-2. **Non-technical users** — Operators and chemists are the primary users. The UI had to be immediately understandable without training.
-3. **Reliability over novelty** — This is production software running a real plant. Boring technology that works beats cutting-edge technology that breaks.
-4. **Incremental delivery** — Modules were shipped one at a time, each solving an immediate pain point. No "big bang" launch.
+1. **Solo developer**. The architecture had to be maintainable by one person. No microservices, no Kubernetes, no over-engineering.
+2. **Non-technical users**. Operators and chemists are the primary users. The UI had to be immediately understandable without training.
+3. **Reliability over novelty**. This is production software running a real plant. Boring technology that works beats cutting-edge technology that breaks.
+4. **Incremental delivery**. Modules were shipped one at a time, each solving an immediate pain point. No "big bang" launch.
 
 ## Architecture: Modular monolith
 
 ```
-┌──────────────────────────────────────────────────────────────┐
-│                        NGINX                                 │
-│                   SSL/TLS Termination                        │
-│                   Reverse Proxy                              │
-└────────────────────────┬─────────────────────────────────────┘
+┌─────────────────────────────────────────────────────┐
+│                      NGINX                          │
+│                SSL/TLS Termination                  │
+│                  Reverse Proxy                      │
+└────────────────────────┬────────────────────────────┘
                          │
           ┌──────────────┴──────────────┐
           │                             │
           ▼                             ▼
-┌──────────────────┐          ┌──────────────────────────────┐
+┌───────────────────┐          ┌───────────────────────────────┐
 │    Static Files   │          │         FastAPI               │
 │    (Frontend)     │          │     Application Server        │
-│                   │          │                                │
+│                   │          │                               │
 │  Vanilla JS       │          │  ┌────────────────────────┐   │
 │  HTML/CSS         │  REST    │  │      15 Routers        │   │
 │  150+ API calls   │ ◀──────▶│  │                        │   │
@@ -34,20 +34,20 @@ DEVIA was built under specific constraints that shaped every architectural decis
 │  Manual cache     │          │  │  pedidos   lims_fab    │   │
 │  URL state        │          │  │  densidad  lims_pt     │   │
 │                   │          │  │  certs     docs_mp     │   │
-└──────────────────┘          │  │  calibr    sam         │   │
+└───────────────────┘          │  │  calibr    sam         │   │
                                │  │  inv_lab   historial   │   │
                                │  │  ident     tendencias  │   │
                                │  │  notif     arquitect   │   │
                                │  └─────────┬──────────────┘   │
-                               │            │                   │
+                               │            │                  │
                                │  ┌─────────▼──────────────┐   │
-                               │  │   Shared Services       │   │
-                               │  │                         │   │
-                               │  │  • Auth (JWT)           │   │
-                               │  │  • Permission Matrix    │   │
-                               │  │  • Audit Logger         │   │
-                               │  │  • Email (SMTP/Gmail)   │   │
-                               │  │  • File Manager         │   │
+                               │  │   Shared Services      │   │
+                               │  │                        │   │
+                               │  │  • Auth (JWT)          │   │
+                               │  │  • Permission Matrix   │   │
+                               │  │  • Audit Logger        │   │
+                               │  │  • Email (SMTP/Gmail)  │   │
+                               │  │  • File Manager        │   │
                                │  └─────────┬──────────────┘   │
                                └────────────┼──────────────────┘
                                             │
@@ -176,11 +176,11 @@ This is a regulatory requirement in chemical manufacturing, but it's also just g
 
 ## Lessons learned
 
-**Start with the pain, not the architecture.** The first thing I built was the Kanban board — because "where is my order?" was the most frequent question on the plant floor. The database schema, the permission system, the LIMS module — all came later, shaped by real usage.
+**Start with the pain, not the architecture.** The first thing I built was the Kanban board because "where is my order?" was the most frequent question on the plant floor. The database schema, the permission system, the LIMS module, all came later.
 
-**Validation is the feature, not a feature.** In a system where bad data has real-world consequences (wrong lot on a certificate, expired material used in production), validation isn't defensive programming — it's the core value proposition.
+**Validation is the feature, not a feature.** In a system where bad data has real-world consequences (wrong lot on a certificate, expired material used in production), validation isn't defensive programming, it's the core value proposition.
 
-**Boring technology is a gift.** PostgreSQL, FastAPI, vanilla JS — none of these are exciting. All of them are well-documented, well-understood, and reliable. For a solo developer supporting a production system, that matters more than any technical novelty.
+**Boring technology is a gift.** PostgreSQL, FastAPI, vanilla JS none of these are exciting. All of them are well-documented, well-understood, and reliable. For a solo developer supporting a production system, that matters more than any technical novelty.
 
 ---
 
