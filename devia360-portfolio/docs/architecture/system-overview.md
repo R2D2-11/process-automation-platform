@@ -71,7 +71,7 @@ DEVIA was built under specific constraints that shaped every architectural decis
 - **Shared database access** across modules without network calls. The Kanban module can check LIMS results. The certificate module can pull data from both.
 - **15 routers provide logical separation** without the overhead of 15 services. Each router owns its domain, its schemas, and its endpoints.
 
-If DEVIA ever needed to scale horizontally (it doesn't — 15 users is well within a single server's capacity), individual routers could be extracted into services. But premature decomposition would have slowed development dramatically.
+If DEVIA ever needed to scale horizontally (it doesn't 15 users is well within a single server's capacity), individual routers could be extracted into services. But premature decomposition would have slowed development dramatically.
 
 ## Key technical decisions
 
