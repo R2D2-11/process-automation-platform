@@ -29,7 +29,7 @@ DEVIA was built under specific constraints that shaped every architectural decis
 │                   │          │                               │
 │  Vanilla JS       │          │  ┌────────────────────────┐   │
 │  HTML/CSS         │  REST    │  │      15 Routers        │   │
-│  150+ API calls   │ ◀──────▶│  │                        │   │
+│  150+ API calls   │ ◀─────▶ │  │                        │   │
 │  Polling 30-60s   │          │  │  kanban    lims_mp     │   │
 │  Manual cache     │          │  │  pedidos   lims_fab    │   │
 │  URL state        │          │  │  densidad  lims_pt     │   │
