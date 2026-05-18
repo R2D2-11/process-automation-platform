@@ -1,10 +1,10 @@
-# 03 — Certificate of Analysis Lifecycle
+# 03_Certificate of Analysis Lifecycle
 
-> How I automated the generation, routing, and digital signing of ~70 certificates per month — replacing a manual loop of Excel templates, email chains, and physical signatures.
+> How I automated the generation, routing, and digital signing of ~70 certificates per month. Replacing a manual loop of Excel templates, email chains, and physical signatures.
 
 ## The problem
 
-Every production order that ships to a customer needs a Certificate of Analysis (CoA) — a document that proves the product meets its specifications. At EQUIMSA, producing one certificate looked like this:
+Every production order that ships to a customer needs a Certificate of Analysis (CoA) a document that proves the product meets its specifications. At EQUIMSA, producing one certificate looked like this:
 
 1. **A chemist opens a blank Excel template**
 2. **Manually copies test results** from the lab Excel files into the template
@@ -24,10 +24,10 @@ And that's the happy path. Delays in the email chain, missing results, or format
 The certificate lifecycle is now a **managed state machine** inside DEVIA:
 
 ```
-┌────────────┐     ┌────────────┐     ┌────────────┐     ┌────────────┐
+┌────────────┐      ┌────────────┐     ┌────────────┐      ┌────────────┐
 │  Creation  │────▶│  Review &  │────▶│  Digital   │────▶│  Issued    │
-│  (auto)    │     │  Assign    │     │  Signature │     │  (ready)   │
-└────────────┘     └────────────┘     └────────────┘     └────────────┘
+│  (auto)    │      │  Assign    │     │  Signature │      │  (ready)   │
+└────────────┘      └────────────┘     └────────────┘      └────────────┘
 ```
 
 ### Stage 1: Auto-generation
@@ -35,7 +35,7 @@ The certificate lifecycle is now a **managed state machine** inside DEVIA:
 When a production order reaches the final release stage in the Kanban pipeline, the system already has all the data it needs:
 
 - Product identity, lot number, manufacturing date
-- All test results (raw material, in-process, final) — already validated
+- All test results
 - Specification limits per parameter
 
 The certificate is assembled automatically. No copy-pasting from spreadsheets.
@@ -125,7 +125,6 @@ This is a **document generation pipeline with approval gates**:
 - It routes through an approval queue with visibility into bottlenecks (pending signatures / pending reviews)
 - The signed output is stored with full traceability (audit trail)
 
-In a bug bounty context, think of the equivalent: a validated vulnerability report needs a structured response assembled from technical details, routed through internal review, and issued to the reporter with accountability for timing and accuracy.
 
 ---
 
