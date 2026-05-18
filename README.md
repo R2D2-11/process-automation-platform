@@ -29,11 +29,11 @@ Before DEVIA, the plant ran on:
 
 | Module | What it does |
 |--------|-------------|
-| **DEVIO** — Production Engine | 7-stage Kanban with conditional advance/rollback logic. Real-time visibility for supervisors. |
-| **DEVIC** — LIMS | Raw material intake, in-process QC, finished product analysis. Auto-validation against product-specific limits. Managed certificate lifecycle with digital signatures. |
-| **DOCS** — Regulatory Docs | Centralized SDS repository with 2-year validity tracking and 90-day expiry alerts. |
-| **SINTEGRA** — Analytics | Historical view of all closed OPs. RFT (Right First Time) calculation. Parameter trend charts. |
-| **Pedidos** — Orders | Automated CSV/TSV import of commercial orders (39+ fields). Assignment, tracking, currency conversion. |
+| **DEVIO**: Production Engine | 7-stage Kanban with conditional advance/rollback logic. Real-time visibility for supervisors. |
+| **DEVIC**: LIMS | Raw material intake, in-process QC, finished product analysis. Auto-validation against product-specific limits. Managed certificate lifecycle with digital signatures. |
+| **DOCS**: Regulatory Docs | Centralized SDS repository with 2-year validity tracking and 90-day expiry alerts. |
+| **SINTEGRA**: Analytics | Historical view of all closed OPs. RFT (Right First Time) calculation. Parameter trend charts. |
+| **Pedidos**: Orders | Automated CSV/TSV import of commercial orders (39+ fields). Assignment, tracking, currency conversion. |
 
 → Deep dives for each module: [`docs/automations/`](docs/automations/)
 
