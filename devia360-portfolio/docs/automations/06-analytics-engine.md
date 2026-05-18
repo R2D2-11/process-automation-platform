@@ -1,23 +1,23 @@
-# 06 — Analytics & Historical Intelligence
+# 06_Analytics & Historical Intelligence
 
-> How I gave a manufacturing plant its first real ability to analyze performance over time — replacing "react after failure" with "detect drift before it becomes a problem."
+> How I gave a manufacturing plant its first real ability to analyze performance over time replacing "react after failure" with "detect drift before it becomes a problem."
 
 ## The problem
 
-Before DEVIA, the plant had data — it just couldn't use it effectively.
+Before DEVIA, the plant had data it just couldn't use it effectively.
 
 **RFT (Right First Time) tracking:** This metric measures what percentage of production orders pass quality control on the first attempt, without needing adjustments. It was tracked using a helper column in the Excel-Kanban file with a simple Yes/No value. The metric itself worked, but the surrounding analysis was broken:
 - Time-based breakdowns (daily, weekly, monthly trends) required manual filtering
 - Cross-referencing RFT with product type, operator, or shift was impractical
 - Any analysis beyond the basic number required exporting, cleaning, and re-processing data
 
-**Quality parameter trends:** Test results (viscosity, pH, density, etc.) were stored as values in Excel columns. To spot a trend — like a parameter slowly drifting toward its limit over several batches — someone would have to:
+**Quality parameter trends:** Test results (viscosity, pH, density, etc.) were stored as values in Excel columns. To spot a trend like a parameter slowly drifting toward its limit over several batches, someone would have to:
 1. Open the right Excel file
 2. Find the right column
 3. Visually scan rows of numbers
 4. Hope they noticed the pattern
 
-**Nobody did this proactively.** The team only looked at parameters after a failure — by which time the damage was done.
+**Nobody did this proactively.** The team only looked at parameters after a failure by which time the damage was done.
 
 **Cycle time analysis:** How long does a production order take? Which stages are bottlenecks? Before DEVIA, these questions were unanswerable. Time wasn't tracked per stage.
 
@@ -31,7 +31,7 @@ SINTEGRA (Analítica e Historial) provides a consolidated view of all completed 
 
 Every closed OP is stored with:
 - Complete metadata (product, lot, operator, dates, order type)
-- **Time spent in each of the 7 Kanban stages** — enabling cycle time analysis
+- Time spent in each of the 7 Kanban stages — enabling cycle time analysis
 - Associated weighing sheets and lab results
 - RFT status (pass on first attempt: yes/no)
 - Tonnage processed
@@ -82,9 +82,9 @@ Viscosity — Product X (last 20 batches)
 ```
 
 This covers all three analysis stages:
-- **Raw material trends** — Are incoming materials degrading in quality over time?
-- **Fabrication trends** — Is the process drifting?
-- **Finished product trends** — Are we getting closer to spec limits?
+- **Raw material trends**. Are incoming materials degrading in quality over time?
+- **Fabrication trends**. Is the process drifting?
+- **Finished product trends**. Are we getting closer to spec limits?
 
 **Before:** "We failed viscosity on Batch 47." (Reactive)
 **After:** "Viscosity has been trending up for the last 8 batches. Let's investigate before it fails." (Proactive)
@@ -95,7 +95,7 @@ This covers all three analysis stages:
 |--------|--------|-------|
 | RFT analysis | Basic Yes/No column, manual quarterly review | Automated with day/week/month/product granularity |
 | Cycle time per stage | Not tracked | Measured for every OP, filterable |
-| Quality trend analysis | None — react after failure only | Historical trend charts, early drift detection |
+| Quality trend analysis | React after failure only | Historical trend charts, early drift detection |
 | Time to generate a performance report | Hours of manual Excel work | Seconds (filter + view) |
 | Data-driven decision making | Anecdotal ("it feels like we're slower") | Evidence-based ("Stage 3 averages 2.3 days for Product X") |
 
