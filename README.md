@@ -10,7 +10,7 @@ Built solo. Deployed in production. Used daily by 15 people across 6 departments
 
 DEVIA 360 is a web-based platform I designed and built from scratch for [EQUIMSA](https://equimsa.com), a tribological products manufacturer in Monterrey, Mexico. It covers the full operational lifecycle: production tracking, laboratory quality control, regulatory document management, commercial order processing, and historical analytics.
 
-This repository documents the **architecture, automation strategies, and measurable impact** of the project. The source code is proprietary — what you'll find here are architecture diagrams, process documentation, illustrative code snippets (rewritten, not production extracts), and quantified before/after metrics.
+This repository documents the **architecture, automation strategies, and measurable impact** of the project. The source code is proprietary. What you'll find here are architecture diagrams, process documentation, illustrative code snippets (rewritten, not production extracts), and quantified before/after metrics.
 
 ## The problem I solved
 
@@ -42,7 +42,7 @@ Before DEVIA, the plant ran on:
 | Metric | Before | After |
 |--------|--------|-------|
 | OP status check | Call 1–2 people, ~10–15 min | Instant (Kanban board) |
-| Raw material QC report | ~190 seconds across 3 steps | 30 seconds, single workflow |
+| Raw material QC report | ~240 seconds across 3 steps | 30 seconds, single workflow |
 | Certificate of analysis | ~5 min manual assembly × 70/month | Auto-generated, seconds each |
 | Data entry errors | ~50% of OPs needed cleanup | Near-zero (Pydantic validation) |
 | Stuck OPs (undetected) | ~12/month | 0 |
@@ -70,11 +70,11 @@ Data I/O:   CSV/TSV import (39+ fields) · XLSX bulk export · File system for d
 │                      NGINX (SSL/TLS)                    │
 └─────────────┬───────────────────────────┬───────────────┘
               │                           │
-     ┌────────▼────────┐        ┌─────────▼────────┐
-     │    Frontend      │        │   FastAPI Backend  │
-     │  (Vanilla JS)    │───────▶│   15 Routers       │
-     │  150+ REST calls │◀───────│   ~6,400 lines     │
-     └─────────────────┘        └────────┬───────────┘
+     ┌────────▼────────┐         ┌─────────▼─────────┐
+     │    Frontend     │         │   FastAPI Backend │
+     │  (Vanilla JS)   │───────▶│   15 Routers      │
+     │  150+ REST calls│◀───────│   ~6,400 lines    │
+     └─────────────────┘         └────────┬──────────┘
                                          │
                           ┌──────────────┼──────────────┐
                           │              │              │
@@ -89,26 +89,11 @@ Data I/O:   CSV/TSV import (39+ fields) · XLSX bulk export · File system for d
 
 This project wasn't built in a vacuum. My process:
 
-1. **Observe** — I work full-time as a QC Analyst on the production floor. I see the pain firsthand.
-2. **Listen** — I approach the people involved, ask about their process and their problems.
-3. **Define** — Weekly meetings to scope solutions, prioritize, and set expectations.
-4. **Build** — I develop iteratively, shipping usable modules that get immediate feedback.
-5. **Support** — When something breaks in production, I go to the floor and fix it. When it's not urgent, I ask for a detailed description and reproduce it on my machine.
-
-This cycle — observe pain, translate it into a system, ship it, support the humans using it — is the same cycle that drives effective triage and support engineering.
-
-## Why this matters beyond manufacturing
-
-The patterns in DEVIA translate directly to any platform that processes high volumes of structured submissions through a multi-stage pipeline with quality gates:
-
-| DEVIA pattern | Platform equivalent |
-|---------------|-------------------|
-| 7-stage OP pipeline with stuck-order detection | Vulnerability report triage pipeline with stale-report alerts |
-| Auto-validation of test results against min/max limits | Automated spam/duplicate filtering of incoming reports |
-| Permission–step–role matrix controlling who can advance what | Reputation-based access controls (submission limits, program eligibility) |
-| Proactive re-inspection alerts | Proactive SLA warnings for reports awaiting response |
-| Translating non-technical user frustration into engineering fixes | Translating hacker frustration into process improvements |
-| Full audit trail per user action | Accountability and traceability for every triage decision |
+1. **Observe**. I work full-time as a QC Analyst on the production floor. I see the pain firsthand.
+2. **Listen**. I approach the people involved, ask about their process and their problems.
+3. **Define**. Weekly meetings to scope solutions, prioritize, and set expectations.
+4. **Build**. I develop iteratively, shipping usable modules that get immediate feedback.
+5. **Support**. When something breaks in production, I go to the floor and fix it. When it's not urgent, I ask for a detailed description and reproduce it on my machine.
 
 ## Repository structure
 
@@ -133,7 +118,7 @@ devia360-portfolio/
 **Carlos Arturo Payén Guzmán**
 Physics graduate (UANL) · QC Analyst at EQUIMSA · Solo developer of DEVIA 360
 
-I build tools that make operational chaos manageable. My background in physics gave me the analytical rigor; building DEVIA taught me that the hardest part of engineering isn't the code — it's understanding what people actually need and shipping something they'll use every day.
+I build tools that make operational chaos manageable. My background in physics gave me the analytical rigor. Building DEVIA taught me that the hardest part of engineering isn't the code, it's understanding what people actually need and shipping something they'll use every day.
 
 📧 arturopayen.r2@gmail.com
 🔗 [linkedin.com/in/arturo-payen](https://linkedin.com/in/arturo-payen)
