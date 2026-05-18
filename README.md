@@ -19,7 +19,7 @@ Before DEVIA, the plant ran on:
 - **Physical instruction sheets** that traveled back and forth between the lab and the production floor
 - **Disconnected Excel files** where ~50% of production orders needed manual data cleanup
 - **Phone calls** to 1–2 people across 3 departments just to check the status of a single order
-- **Email threads** as the "repository" for regulatory safety documents — with conflicting records between departments
+- **Email threads** as the "repository" for regulatory safety documents with conflicting records between departments
 - **No proactive alerts** for re-inspections, document expirations, or stuck orders
 - **Zero trend analysis** quality parameters were only reviewed after something failed
 
