@@ -1,17 +1,15 @@
-# 05 — Data Validation & Business Rule Engine
+# 05_Data Validation & Business Rule Engine
 
 > How I reduced data entry errors from ~50% of production orders to near-zero using a centralized validation architecture.
 
 ## The problem
 
-When 15 people across 6 departments enter data into a shared system, errors are not a possibility — they are a certainty. Before DEVIA, I personally cleaned the data in the shared Excel-Kanban file and found that roughly **1 in 2 production orders** had some form of data error: wrong lot numbers, duplicate OP numbers, missing fields, values outside valid ranges.
+When 15 people across 6 departments enter data into a shared system, errors are not a possibility they are a certainty. Before DEVIA, I personally cleaned the data in a shared Excel-Kanban file and found that roughly **1 in 2 production orders** had some form of data error: wrong lot numbers, duplicate OP numbers, missing fields, values outside valid ranges.
 
 These errors cascaded:
 - A wrong lot number in the production log meant the certificate of analysis referenced the wrong batch
 - A duplicate OP number caused confusion about which order was being tracked
 - Missing fields meant someone had to chase down the information later, adding delays
-
-The root cause wasn't carelessness — it was that **Excel has no opinions about your data.** Any value goes in any cell.
 
 ## The solution
 
@@ -78,7 +76,7 @@ async def create_op(data: ProductionOrderCreate, db: Session):
 
 ### The permission–step–role matrix
 
-The most complex validation in the system isn't about data types — it's about **who can do what, and when.** Every state transition in the Kanban pipeline is checked against a centralized matrix:
+The most complex validation in the system isn't about data types it's about **who can do what, and when.** Every state transition in the Kanban pipeline is checked against a centralized matrix:
 
 ```
 ┌──────────────┬───────────────────┬──────────────────┐
@@ -94,18 +92,18 @@ The most complex validation in the system isn't about data types — it's about 
 └──────────────┴───────────────────┴──────────────────┘
 ```
 
-This matrix is evaluated on **every single transition.** It's not middleware that can be bypassed — it's in the core transition function. If the check fails, the API returns a clear error explaining why the transition was denied.
+This matrix is evaluated on **every single transition.** It's not middleware that can be bypassed, it's in the core transition function. If the check fails, the API returns a clear error explaining why the transition was denied.
 
 ### Approval workflow for exceptions
 
-Sometimes a legitimate need exists to do something the rules don't allow — like correcting an OP number after it's been assigned. Instead of giving users blanket edit access (which is how errors happened in Excel), DEVIA uses an **approval request system:**
+Sometimes a legitimate need exists to do something the rules don't allow like correcting an OP number after it's been assigned. Instead of giving users blanket edit access (which is how errors happened in Excel), DEVIA uses an **approval request system:**
 
 1. User requests the change through the Notifications module
 2. The request goes to an administrator's approval queue
 3. Admin approves or rejects, with a record of who decided and when
 4. If approved, the system makes the change with an audit entry
 
-This keeps the data clean while acknowledging that rules need exceptions — handled through process, not workarounds.
+This keeps the data clean while acknowledging that rules need exceptions, handled through process, not workarounds.
 
 ## Impact
 
@@ -119,14 +117,8 @@ This keeps the data clean while acknowledging that rules need exceptions — han
 
 ## Why this matters beyond manufacturing
 
-Data validation and access control are the backbone of any platform that processes external submissions at scale:
-
-- **Spam filtering** is validation: does this report meet minimum quality thresholds?
-- **Duplicate detection** is validation: has this vulnerability already been reported?
-- **Reputation-based access** is a permission matrix: can this user submit to this program?
-- **Exception handling** is an approval workflow: a hacker disputes a decision → review → resolution with accountability
-
-The patterns are the same. The cost of bad data is the same: wasted time, lost trust, and cascading errors downstream.
+Data validation and access control are the backbone of any platform that processes external submissions at scale.
+The cost of bad data is the same: wasted time, lost trust, and cascading errors downstream.
 
 ---
 
