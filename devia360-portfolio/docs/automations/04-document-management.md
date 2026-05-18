@@ -1,19 +1,19 @@
-# 04 — Regulatory Document Management
+# 04_Regulatory Document Management
 
 > How I turned a mess of scattered emails and conflicting records into an audit-ready document repository with automated expiration tracking.
 
 ## The problem
 
-Chemical manufacturers are required to maintain current Safety Data Sheets (SDS/HDS) for every raw material they use. These documents have a legal shelf life — typically 2 years — and auditors check that they're current, complete, and accessible.
+Chemical manufacturers are required to maintain current Safety Data Sheets (SDS/HDS) for every raw material they use. These documents have a legal shelf life of 2 years and auditors check that they're current, complete, and accessible.
 
 Before DEVIA, the situation was:
 
-- **Purchasing** had their own list of SDS documents
-- **The lab** had a different list
+- Purchasing had their own list of SDS documents
+- The lab had a different list
 - **The two lists didn't match**
 - Documents were exchanged via email and stored... in email threads
-- **No one knew which documents were expired** until someone manually checked
-- **No shared repository** — if you needed an SDS, you searched your inbox and hoped
+- No one knew **which documents were expired** until someone **manually checked**
+- **No shared repository**
 
 I spent my first 6 months at EQUIMSA largely focused on "plugging holes" in documentation ahead of a regulatory audit. This was the pain that directly inspired the DOCS module.
 
@@ -42,9 +42,9 @@ Every document carries:
 - **Status**: current, expiring soon (90-day alert), expired, or missing
 
 The system automatically flags:
-- ⚠️ **Documents expiring within 90 days** — so Purchasing can request updated versions proactively
-- ❌ **Expired documents** — visible at a glance, not buried in a spreadsheet
-- 🔴 **Materials with incomplete documentation** — missing SDS, missing in one language, etc.
+- ⚠️ **Documents expiring within 90 days** so Purchasing can request updated versions proactively
+- ❌ **Expired documents** visible at a glance, not buried in a spreadsheet
+- 🔴 **Materials with incomplete documentation** missing SDS, missing in one language, etc.
 
 ### Department-level visibility
 
@@ -77,10 +77,9 @@ After:
 Every organization that deals with compliance, certifications, or document lifecycles faces this exact problem:
 
 - **Security certifications** (SOC 2, ISO 27001) require current policies and evidence artifacts with expiration tracking
-- **Bug bounty program policies** need version control, visibility across stakeholders, and proactive renewal
-- **Vendor/partner documentation** — NDAs, contracts, SLAs — all expire and need tracking
+- **Vendor/partner documentation** NDAs, contracts, SLAs. All expire and need tracking
 
-The underlying pattern: **a repository of structured documents with validity windows, proactive alerts, and cross-stakeholder visibility.** The domain doesn't matter — the chaos of untracked document expiration is universal.
+The underlying pattern: **a repository of structured documents with validity windows, proactive alerts, and cross-stakeholder visibility.** The domain doesn't matter. The chaos of untracked document expiration is universal.
 
 ---
 
